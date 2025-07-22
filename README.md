@@ -1,13 +1,13 @@
 <img src="Snowflake_Logo.svg" width="200">
 
-# NASM Medallion Architecture
+# Medallion Architecture
 
-This project contains the **National Academy of Sports Medicine (NASM)** data warehouse medallion architecture design for Snowflake, including Bronze (Raw), Silver (Refined), and Gold (Modeled) layers with integrated social media sentiment analysis.
+This project contains the a Sample data warehouse medallion architecture design for Snowflake, including Bronze (Raw), Silver (Refined), and Gold (Modeled) layers with integrated social media sentiment analysis.
 
 ## 📁 Project Files
 
 ### Core Application
-- **`nasm_architecture_app.py`** - Streamlit app for viewing ER diagrams with zoom functionality
+- **`medallion_architecture_app.py`** - Streamlit app for viewing ER diagrams with zoom functionality
 - **`requirements_local.txt`** - Python dependencies for the Streamlit app
 - **`deployment_instructions_local.md`** - Step-by-step deployment guide for Snowflake
 
@@ -22,7 +22,7 @@ This project contains the **National Academy of Sports Medicine (NASM)** data wa
 - **`gold_layer_er_diagram.mmd`** - Source for Gold layer
 
 ### Documentation
-- **`NASM_Medallion_Architecture_Documentation.md`** - Comprehensive architecture documentation
+- **`Medallion_Architecture_Documentation.md`** - Comprehensive architecture documentation
 
 ## 🚀 Quick Start
 
@@ -38,10 +38,10 @@ PUT file://requirements_local.txt @YOUR_APP_STAGE/;
 
 ### 2. Create Streamlit App
 ```sql
-CREATE OR REPLACE STREAMLIT NASM_ARCHITECTURE_VIEWER
+CREATE OR REPLACE STREAMLIT MEDALLION_ARCHITECTURE_VIEWER
 ROOT_LOCATION = '@YOUR_APP_STAGE/'
-MAIN_FILE = 'nasm_architecture_app.py'
-COMMENT = 'NASM Architecture Viewer with Local SVG Files';
+MAIN_FILE = 'medallion_architecture_app.py'
+COMMENT = 'Medallion Architecture Viewer with Local SVG Files';
 ```
 
 ## ✨ Features
@@ -112,4 +112,4 @@ PUT file://gold_layer_er_diagram.svg @YOUR_APP_STAGE/;
 
 For questions about this architecture or deployment, refer to:
 - `deployment_instructions_local.md` for setup guidance
-- `NASM_Medallion_Architecture_Documentation.md` for detailed technical specifications 
+- `Medallion_Architecture_Documentation.md` for detailed technical specifications 
