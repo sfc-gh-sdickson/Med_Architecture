@@ -1,0 +1,272 @@
+erDiagram
+    FACT_SALES {
+        string sales_fact_key PK
+        string transaction_id UK
+        int customer_key FK
+        int product_key FK
+        int service_key FK
+        int certification_key FK
+        int training_key FK
+        int sales_rep_key FK
+        int transaction_date_key FK
+        int geography_key FK
+        decimal gross_amount
+        decimal discount_amount
+        decimal net_amount
+        decimal tax_amount
+        decimal cost_amount
+        decimal profit_amount
+        int quantity
+        string payment_method
+        string sales_channel
+        string transaction_type
+        boolean is_refunded
+        decimal refund_amount
+        datetime transaction_timestamp
+        datetime created_date
+        datetime modified_date
+    }
+    
+    FACT_SOCIAL_SENTIMENT {
+        string sentiment_fact_key PK
+        int customer_key FK
+        int product_key FK
+        int service_key FK
+        int certification_key FK
+        int training_key FK
+        int post_date_key FK
+        int platform_key FK
+        string post_id
+        decimal sentiment_score
+        string sentiment_category
+        decimal sentiment_confidence
+        int engagement_count
+        int reach_count
+        int share_count
+        boolean mentions_nasm
+        string brand_mention_type
+        string content_category
+        datetime post_timestamp
+        datetime created_date
+    }
+    
+    FACT_CUSTOMER_ENGAGEMENT {
+        string engagement_fact_key PK
+        int customer_key FK
+        int date_key FK
+        int product_purchases
+        int service_purchases
+        int certification_purchases
+        int training_purchases
+        decimal total_revenue
+        decimal average_order_value
+        int social_mentions
+        decimal avg_sentiment_score
+        int days_since_last_purchase
+        string engagement_tier
+        datetime created_date
+    }
+    
+    DIM_CUSTOMER {
+        int customer_key PK
+        string customer_id UK
+        string first_name
+        string last_name
+        string full_name
+        string email
+        string phone
+        date birth_date
+        int age
+        string age_group
+        string gender
+        string customer_type
+        string customer_tier
+        string acquisition_channel
+        date registration_date
+        int days_as_customer
+        string lifecycle_stage
+        boolean is_active
+        date effective_start_date
+        date effective_end_date
+        boolean is_current
+        int version_number
+        datetime created_date
+        datetime modified_date
+    }
+    
+    DIM_PRODUCT {
+        int product_key PK
+        string product_id UK
+        string product_name
+        string product_code
+        string product_category
+        string product_subcategory
+        string product_line
+        string brand
+        decimal list_price
+        decimal cost
+        string product_status
+        string product_description
+        date launch_date
+        date discontinue_date
+        boolean is_active
+        datetime created_date
+        datetime modified_date
+    }
+    
+    DIM_SERVICE {
+        int service_key PK
+        string service_id UK
+        string service_name
+        string service_code
+        string service_type
+        string service_category
+        string delivery_method
+        int duration_hours
+        decimal list_price
+        decimal cost
+        string service_status
+        string service_description
+        date launch_date
+        date discontinue_date
+        boolean is_active
+        datetime created_date
+        datetime modified_date
+    }
+    
+    DIM_CERTIFICATION {
+        int certification_key PK
+        string certification_id UK
+        string certification_name
+        string certification_code
+        string certification_level
+        string certification_type
+        string specialization_area
+        int validity_years
+        string prerequisites
+        decimal list_price
+        decimal cost
+        string certification_status
+        date launch_date
+        date discontinue_date
+        boolean is_active
+        datetime created_date
+        datetime modified_date
+    }
+    
+    DIM_TRAINING {
+        int training_key PK
+        string training_id UK
+        string training_name
+        string training_code
+        string training_type
+        string training_category
+        string format
+        string delivery_method
+        int duration_hours
+        string difficulty_level
+        decimal list_price
+        decimal cost
+        string training_status
+        date launch_date
+        date discontinue_date
+        boolean is_active
+        datetime created_date
+        datetime modified_date
+    }
+    
+    DIM_DATE {
+        int date_key PK
+        date full_date UK
+        int year
+        int quarter
+        int month
+        int week
+        int day
+        string month_name
+        string day_name
+        string quarter_name
+        int day_of_year
+        int week_of_year
+        boolean is_weekend
+        boolean is_holiday
+        string holiday_name
+        string fiscal_year
+        string fiscal_quarter
+        string fiscal_period
+        boolean is_last_day_of_month
+        boolean is_first_day_of_month
+    }
+    
+    DIM_SALES_REP {
+        int sales_rep_key PK
+        string sales_rep_id UK
+        string first_name
+        string last_name
+        string full_name
+        string email
+        string territory
+        string region
+        string role
+        string manager_name
+        date hire_date
+        int years_of_service
+        string performance_tier
+        boolean is_active
+        datetime created_date
+        datetime modified_date
+    }
+    
+    DIM_GEOGRAPHY {
+        int geography_key PK
+        string zip_code
+        string city
+        string county
+        string state_code
+        string state_name
+        string country_code
+        string country_name
+        string region
+        string time_zone
+        decimal latitude
+        decimal longitude
+        int population
+        string market_size
+        datetime created_date
+        datetime modified_date
+    }
+    
+    DIM_SOCIAL_PLATFORM {
+        int platform_key PK
+        string platform_name UK
+        string platform_category
+        string platform_type
+        string target_audience
+        int max_post_length
+        boolean supports_video
+        boolean supports_images
+        string api_version
+        boolean is_active
+        datetime created_date
+        datetime modified_date
+    }
+    
+    FACT_SALES ||--|| DIM_CUSTOMER : "customer_key"
+    FACT_SALES ||--o| DIM_PRODUCT : "product_key"
+    FACT_SALES ||--o| DIM_SERVICE : "service_key"
+    FACT_SALES ||--o| DIM_CERTIFICATION : "certification_key"
+    FACT_SALES ||--o| DIM_TRAINING : "training_key"
+    FACT_SALES ||--|| DIM_SALES_REP : "sales_rep_key"
+    FACT_SALES ||--|| DIM_DATE : "transaction_date_key"
+    FACT_SALES ||--|| DIM_GEOGRAPHY : "geography_key"
+    
+    FACT_SOCIAL_SENTIMENT ||--o| DIM_CUSTOMER : "customer_key"
+    FACT_SOCIAL_SENTIMENT ||--o| DIM_PRODUCT : "product_key"
+    FACT_SOCIAL_SENTIMENT ||--o| DIM_SERVICE : "service_key"
+    FACT_SOCIAL_SENTIMENT ||--o| DIM_CERTIFICATION : "certification_key"
+    FACT_SOCIAL_SENTIMENT ||--o| DIM_TRAINING : "training_key"
+    FACT_SOCIAL_SENTIMENT ||--|| DIM_DATE : "post_date_key"
+    FACT_SOCIAL_SENTIMENT ||--|| DIM_SOCIAL_PLATFORM : "platform_key"
+    
+    FACT_CUSTOMER_ENGAGEMENT ||--|| DIM_CUSTOMER : "customer_key"
+    FACT_CUSTOMER_ENGAGEMENT ||--|| DIM_DATE : "date_key" 

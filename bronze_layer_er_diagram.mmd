@@ -1,0 +1,161 @@
+erDiagram
+    RAW_SALES_TRANSACTIONS {
+        string transaction_id PK
+        string customer_id FK
+        string product_id FK
+        string service_id FK
+        string certification_id FK
+        string training_id FK
+        decimal amount
+        datetime transaction_date
+        string payment_method
+        string sales_channel
+        string sales_rep_id
+        string raw_data_json
+        datetime ingested_at
+        string source_system
+    }
+    
+    RAW_CUSTOMERS {
+        string customer_id PK
+        string first_name
+        string last_name
+        string email
+        string phone
+        string address_line1
+        string address_line2
+        string city
+        string state
+        string zip_code
+        string country
+        datetime registration_date
+        string customer_type
+        string raw_data_json
+        datetime ingested_at
+        string source_system
+    }
+    
+    RAW_PRODUCTS {
+        string product_id PK
+        string product_name
+        string product_category
+        string product_subcategory
+        decimal price
+        string description
+        string status
+        datetime created_date
+        string raw_data_json
+        datetime ingested_at
+        string source_system
+    }
+    
+    RAW_SERVICES {
+        string service_id PK
+        string service_name
+        string service_type
+        string service_category
+        decimal price
+        string duration
+        string description
+        string status
+        string raw_data_json
+        datetime ingested_at
+        string source_system
+    }
+    
+    RAW_CERTIFICATIONS {
+        string certification_id PK
+        string certification_name
+        string certification_level
+        string certification_type
+        decimal price
+        string requirements
+        string validity_period
+        string status
+        string raw_data_json
+        datetime ingested_at
+        string source_system
+    }
+    
+    RAW_TRAINING_PROGRAMS {
+        string training_id PK
+        string training_name
+        string training_type
+        string training_category
+        decimal price
+        string duration
+        string format
+        string description
+        string status
+        string raw_data_json
+        datetime ingested_at
+        string source_system
+    }
+    
+    RAW_TWITTER_POSTS {
+        string tweet_id PK
+        string user_id
+        string username
+        string tweet_text
+        int retweet_count
+        int like_count
+        int reply_count
+        datetime created_at
+        string hashtags
+        string mentions
+        string raw_data_json
+        datetime ingested_at
+        string source_api
+    }
+    
+    RAW_TIKTOK_VIDEOS {
+        string video_id PK
+        string user_id
+        string username
+        string video_description
+        int view_count
+        int like_count
+        int comment_count
+        int share_count
+        datetime created_at
+        string hashtags
+        string effects
+        string raw_data_json
+        datetime ingested_at
+        string source_api
+    }
+    
+    RAW_FACEBOOK_POSTS {
+        string post_id PK
+        string page_id
+        string page_name
+        string post_content
+        string post_type
+        int like_count
+        int comment_count
+        int share_count
+        datetime created_at
+        string raw_data_json
+        datetime ingested_at
+        string source_api
+    }
+    
+    RAW_SOCIAL_MEDIA_MENTIONS {
+        string mention_id PK
+        string platform
+        string post_id
+        string mention_text
+        string sentiment_raw
+        string brand_keywords
+        datetime mention_date
+        string user_id
+        string raw_data_json
+        datetime ingested_at
+        string source_system
+    }
+    
+    RAW_SALES_TRANSACTIONS ||--o{ RAW_CUSTOMERS : "customer_id"
+    RAW_SALES_TRANSACTIONS ||--o{ RAW_PRODUCTS : "product_id"
+    RAW_SALES_TRANSACTIONS ||--o{ RAW_SERVICES : "service_id"
+    RAW_SALES_TRANSACTIONS ||--o{ RAW_CERTIFICATIONS : "certification_id"
+    RAW_SALES_TRANSACTIONS ||--o{ RAW_TRAINING_PROGRAMS : "training_id" 

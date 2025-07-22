@@ -1,0 +1,190 @@
+erDiagram
+    REFINED_SALES_FACTS {
+        string sales_fact_id PK
+        string transaction_id UK
+        string customer_key FK
+        string product_key FK
+        string service_key FK
+        string certification_key FK
+        string training_key FK
+        decimal gross_amount
+        decimal discount_amount
+        decimal net_amount
+        decimal tax_amount
+        date transaction_date
+        string payment_method_std
+        string sales_channel_std
+        string sales_rep_key FK
+        string currency_code
+        boolean is_refunded
+        datetime created_timestamp
+        datetime modified_timestamp
+        string data_quality_score
+    }
+    
+    REFINED_CUSTOMERS {
+        string customer_key PK
+        string customer_id UK
+        string first_name_clean
+        string last_name_clean
+        string email_clean
+        string phone_clean
+        string full_address
+        string city_clean
+        string state_code
+        string zip_code_clean
+        string country_code
+        date registration_date
+        string customer_type_std
+        string customer_tier
+        boolean is_active
+        datetime created_timestamp
+        datetime modified_timestamp
+        string data_quality_score
+    }
+    
+    REFINED_PRODUCTS {
+        string product_key PK
+        string product_id UK
+        string product_name_clean
+        string product_category_std
+        string product_subcategory_std
+        decimal current_price
+        string description_clean
+        string status_std
+        date effective_start_date
+        date effective_end_date
+        boolean is_current
+        datetime created_timestamp
+        datetime modified_timestamp
+    }
+    
+    REFINED_SERVICES {
+        string service_key PK
+        string service_id UK
+        string service_name_clean
+        string service_type_std
+        string service_category_std
+        decimal current_price
+        int duration_minutes
+        string description_clean
+        string status_std
+        date effective_start_date
+        date effective_end_date
+        boolean is_current
+        datetime created_timestamp
+        datetime modified_timestamp
+    }
+    
+    REFINED_CERTIFICATIONS {
+        string certification_key PK
+        string certification_id UK
+        string certification_name_clean
+        string certification_level_std
+        string certification_type_std
+        decimal current_price
+        string requirements_clean
+        int validity_days
+        string status_std
+        date effective_start_date
+        date effective_end_date
+        boolean is_current
+        datetime created_timestamp
+        datetime modified_timestamp
+    }
+    
+    REFINED_TRAINING_PROGRAMS {
+        string training_key PK
+        string training_id UK
+        string training_name_clean
+        string training_type_std
+        string training_category_std
+        decimal current_price
+        int duration_hours
+        string format_std
+        string description_clean
+        string status_std
+        date effective_start_date
+        date effective_end_date
+        boolean is_current
+        datetime created_timestamp
+        datetime modified_timestamp
+    }
+    
+    REFINED_SOCIAL_MEDIA_POSTS {
+        string post_key PK
+        string platform_std
+        string original_post_id
+        string user_id_clean
+        string username_clean
+        string content_clean
+        string content_language
+        int engagement_score
+        datetime post_timestamp
+        string sentiment_score
+        string sentiment_category
+        decimal sentiment_confidence
+        string brand_mention_type
+        boolean contains_nasm_keywords
+        datetime created_timestamp
+        datetime modified_timestamp
+    }
+    
+    REFINED_SENTIMENT_ANALYSIS {
+        string sentiment_key PK
+        string post_key FK
+        string sentiment_engine
+        decimal positive_score
+        decimal negative_score
+        decimal neutral_score
+        string overall_sentiment
+        decimal confidence_score
+        string keywords_extracted
+        string topics_identified
+        datetime analysis_timestamp
+        datetime created_timestamp
+    }
+    
+    REFINED_SALES_REPS {
+        string sales_rep_key PK
+        string sales_rep_id UK
+        string first_name
+        string last_name
+        string email
+        string territory
+        string role
+        date hire_date
+        boolean is_active
+        datetime created_timestamp
+        datetime modified_timestamp
+    }
+    
+    REF_PAYMENT_METHODS {
+        string payment_method_code PK
+        string payment_method_name
+        string payment_type
+        boolean is_active
+    }
+    
+    REF_SALES_CHANNELS {
+        string channel_code PK
+        string channel_name
+        string channel_type
+        boolean is_active
+    }
+    
+    REF_SENTIMENT_CATEGORIES {
+        string sentiment_code PK
+        string sentiment_name
+        string sentiment_description
+        decimal min_score
+        decimal max_score
+    }
+    
+    REFINED_SALES_FACTS ||--|| REFINED_CUSTOMERS : "customer_key"
+    REFINED_SALES_FACTS ||--o| REFINED_PRODUCTS : "product_key"
+    REFINED_SALES_FACTS ||--o| REFINED_SERVICES : "service_key"
+    REFINED_SALES_FACTS ||--o| REFINED_CERTIFICATIONS : "certification_key"
+    REFINED_SALES_FACTS ||--o| REFINED_TRAINING_PROGRAMS : "training_key"
+    REFINED_SALES_FACTS ||--|| REFINED_SALES_REPS : "sales_rep_key"
+    REFINED_SOCIAL_MEDIA_POSTS ||--|| REFINED_SENTIMENT_ANALYSIS : "post_key" 
